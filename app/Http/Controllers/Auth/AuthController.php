@@ -22,12 +22,19 @@ use Laravel\Spark\Events\Team\Created as TeamCreated;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Laravel\Spark\Contracts\Repositories\UserRepository;
 use Laravel\Spark\Contracts\Repositories\TeamRepository;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Laravel\Spark\Contracts\Auth\Subscriber as SubscriberContract;
 
 class AuthController extends Controller
 {
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins, ValidatesRequests, InteractsWithSparkHooks;
+
+
+    use AuthenticatesUsers, RegistersUsers {
+        AuthenticatesUsers::guard insteadof RegistersUsers;
+    }
+
+    use ValidatesRequests, InteractsWithSparkHooks;
 
     /**
      * The user repository instance.

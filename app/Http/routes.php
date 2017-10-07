@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/', function () {
+    return view('spark::welcome');
+});
+
 Route::group(['middleware' => ['web']], function ($router) {
     // Terms Routes...
     $router->get('terms', 'TermsController@show');
